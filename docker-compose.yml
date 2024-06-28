@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres:16
+    restart: always
+    shm_size: 256mb
+    environment:
+      - POSTGRES_PASSWORD=example
+    ports:
+      - "1234:5432"
