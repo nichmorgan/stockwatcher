@@ -1,18 +1,37 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request, Response
 from kink import di
 
 from app.api.auth import get_current_active_user_id
 from app.dto.response import SimpleResponse
 from app.dto.stock import StockResponse
-from app.models.stock import StockPosition
 from app.services.stocks import StockService
+from fastapi_cache.decorator import cache
 
 __all__ = ["ROUTER"]
 
-ROUTER = APIRouter(prefix="/stock")
+ROUTER = APIRouter(prefix="/stock", tags=["stock"])
+
+
+def get_stock_key_builder(
+    func,
+    namespace: str = "",
+    request: Request = None,
+    response: Response = None,
+    args: tuple = (),
+    kwargs: dict = {},
+) -> str:
+    data = ":".join(
+        [
+            f"symbol={kwargs['stock_symbol']}",
+            f"user_id={kwargs['user_id']}",
+        ]
+    )
+    key = f"{__name__}#{data}"
+    return key
 
 
 @ROUTER.get("/{stock_symbol}")
+@cache(expire=60, key_builder=get_stock_key_builder)
 async def get_stock(
     stock_symbol: str,
     *,

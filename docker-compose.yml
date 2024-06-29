@@ -8,3 +8,9 @@ services:
       - POSTGRES_DB=app
     ports:
       - "1234:5432"
+    
+  cache:
+    image: redis:7
+    restart: always
+    ports:
+      - "1235:6379"
