@@ -1,5 +1,6 @@
-from dotenv import load_dotenv
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 ROOT_DIR = Path(__file__).parents[1]
 ENV_FILE = ROOT_DIR / ".env"
@@ -11,8 +12,8 @@ else:
     print(f"Loading environment variables from {ENV_FILE}")
 
 
-from app.api import *
-
 import logging
+
+from app.api import *
 
 logging.basicConfig(level=logging.INFO)

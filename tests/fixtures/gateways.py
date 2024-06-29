@@ -1,9 +1,9 @@
-from kink import di
 import pytest
+from kink import di
 
 from app.config import PolygonConfig
-from app.services.marketwatch import MarketWatchService
 from app.gateways.polygon import PolygonGateway
+from app.services.marketwatch import MarketWatchService
 
 __all__ = ["polygon_gateway", "market_watch_gateway"]
 

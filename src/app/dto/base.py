@@ -1,6 +1,6 @@
 import inflection
-from sqlmodel import SQLModel
 from pydantic import ConfigDict
+from sqlmodel import SQLModel
 
 __all__ = ["BaseDto"]
 

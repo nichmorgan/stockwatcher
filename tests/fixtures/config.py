@@ -1,6 +1,6 @@
+import pytest
 from kink import di
 from pydantic import SecretStr
-import pytest
 
 from app.config import PolygonConfig
 

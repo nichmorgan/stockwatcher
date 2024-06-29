@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, Request, Response
+from fastapi_cache.decorator import cache
 from kink import di
 
 from app.api.auth import get_current_active_user_id
 from app.dto.response import SimpleResponse
 from app.dto.stock import StockResponse
 from app.services.stocks import StockService
-from fastapi_cache.decorator import cache
 
 __all__ = ["ROUTER"]
 

@@ -1,8 +1,10 @@
 import re
+
 import pytest
 import requests_mock
-from app.gateways.polygon import PolygonGateway
 from dateutil.relativedelta import relativedelta
+
+from app.gateways.polygon import PolygonGateway
 from tests.utils import dummy_fn_factory
 
 

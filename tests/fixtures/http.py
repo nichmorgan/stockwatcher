@@ -1,6 +1,6 @@
-from fastapi.testclient import TestClient
 import jwt
 import pytest
+from fastapi.testclient import TestClient
 
 from app.api import APP
 from app.api.auth import ALGORITHM

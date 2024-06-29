@@ -3,10 +3,10 @@ from datetime import datetime, timezone
 from pydantic import (
     BaseModel,
     Field,
-    field_validator,
-    field_serializer,
-    PositiveFloat,
     PastDatetime,
+    PositiveFloat,
+    field_serializer,
+    field_validator,
 )
 
 __all__ = ["MarketStockRecord", "MarketStockApiResponse"]

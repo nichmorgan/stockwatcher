@@ -1,11 +1,11 @@
 from datetime import datetime, timezone
-import pytest
-from polyfactory.factories.pydantic_factory import ModelFactory
-from dateutil.relativedelta import relativedelta
 
-from app.dto import stock
+import pytest
+from dateutil.relativedelta import relativedelta
+from polyfactory.factories.pydantic_factory import ModelFactory
+
+from app.dto import marketwatch, stock
 from app.models.stock import StockPosition
-from app.dto import marketwatch
 
 
 @pytest.fixture

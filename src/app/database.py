@@ -1,12 +1,14 @@
 import logging
+
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
 from kink import Container, di
+from redis import asyncio as aioredis
+from sqlalchemy import make_url
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 from sqlmodel import SQLModel
 from sqlmodel.ext.asyncio.session import AsyncSession
-from sqlalchemy import make_url
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.redis import RedisBackend
-from redis import asyncio as aioredis
+
 from app.config import CacheConfig, DatabaseConfig
 from app.models import *
 

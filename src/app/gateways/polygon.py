@@ -1,11 +1,11 @@
+import logging
 from datetime import date, datetime
 from enum import Enum
-import logging
 from urllib.parse import urljoin
 
+import requests
 from dateutil.relativedelta import relativedelta
 from kink import inject
-import requests
 
 from app.config import PolygonConfig
 from app.dto.marketwatch import MarketStockApiResponse, MarketStockRecord
