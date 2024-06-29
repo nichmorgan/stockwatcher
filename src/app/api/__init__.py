@@ -10,8 +10,9 @@ __all__ = ["APP"]
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> None:
+async def lifespan(app: FastAPI):
     await create_all_tables(di)
+    yield
 
 
 APP = FastAPI(lifespan=lifespan)

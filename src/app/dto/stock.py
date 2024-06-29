@@ -10,9 +10,17 @@ __all__ = [
     "CreateStockPosition",
     "UpdateStockPosition",
     "StockResponse",
+    "StockApiResponse",
 ]
 
-AMOUNT_TYPE = Annotated[int, AfterValidator(lambda v: v >= 0)]
+
+def __validate_amount(v: int) -> int:
+    if v < 0:
+        raise ValueError("Amount must be greater than or equal to 0")
+    return v
+
+
+AMOUNT_TYPE = Annotated[int, AfterValidator(__validate_amount)]
 
 
 class StockPerformance(BaseDto):
@@ -37,7 +45,7 @@ class Stock(BaseDto):
 
 
 class CreateStockPosition(BaseDto):
-    user_id: PositiveInt
+    user_id: str
     symbol: str
     amount: AMOUNT_TYPE
 

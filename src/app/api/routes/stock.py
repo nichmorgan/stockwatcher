@@ -4,6 +4,7 @@ from pydantic import PositiveInt
 
 from app.api.auth import get_current_active_user_id
 from app.dto.response import SimpleResponse
+from app.dto.stock import StockResponse
 from app.models.stock import StockPosition
 from app.services.stocks import StockService
 
@@ -18,8 +19,11 @@ async def get_stock(
     *,
     service: StockService = Depends(lambda: di[StockService]),
     user_id: str = Depends(get_current_active_user_id),
-) -> StockPosition:
-    return service.get_stock_position(stock_symbol, user_id=user_id)
+) -> StockResponse:
+    response = await service.get_stock_position(
+        stock_symbol.strip().upper(), user_id=user_id
+    )
+    return response
 
 
 @ROUTER.post("/{stock_symbol}", status_code=201)
@@ -30,7 +34,7 @@ async def purchase_stock(
     service: StockService = Depends(lambda: di[StockService]),
     user_id: str = Depends(get_current_active_user_id),
 ) -> SimpleResponse:
-    await service.purchase_stock(stock_symbol, amount, user_id=user_id)
+    await service.purchase_stock(stock_symbol.strip().upper(), amount, user_id=user_id)
 
     message = f"{amount} units of stock {stock_symbol} were added to your stock record"
     return SimpleResponse(message=message)

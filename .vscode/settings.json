@@ -1,3 +1,7 @@
 {
-  "python.analysis.extraPaths": ["./src"]
+  "python.analysis.extraPaths": ["./src"],
+  "python.testing.pytestArgs": ["${workspaceFolder}/tests"],
+  "python.testing.pytestPath": "poetry run pytest",
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }

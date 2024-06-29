@@ -1,3 +1,9 @@
 fmt:
-	poetry run isort src
-	poetry run black src
+	poetry run isort src tests
+	poetry run black src tests
+
+test:
+	poetry run pytest
+
+dev:
+	poetry run fastapi dev src/main.py --reload
