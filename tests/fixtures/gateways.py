@@ -1,3 +1,4 @@
+from kink import di
 import pytest
 
 from app.config import PolygonConfig
@@ -9,9 +10,13 @@ __all__ = ["polygon_gateway", "market_watch_gateway"]
 
 @pytest.fixture
 def polygon_gateway(polygon_config: PolygonConfig) -> PolygonGateway:  # type: ignore
-    yield PolygonGateway(polygon_config)
+    gateway = PolygonGateway(polygon_config)
+    di[PolygonGateway] = gateway
+    return gateway
 
 
 @pytest.fixture
 def market_watch_gateway(polygon_gateway: PolygonGateway) -> MarketWatchService:  # type: ignore
-    yield MarketWatchService(polygon_gateway)
+    service = MarketWatchService(polygon_gateway)
+    di[MarketWatchService] = service
+    return service

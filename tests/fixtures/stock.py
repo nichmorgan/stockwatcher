@@ -4,6 +4,7 @@ from polyfactory.factories.pydantic_factory import ModelFactory
 from dateutil.relativedelta import relativedelta
 
 from app.dto import stock
+from app.models.stock import StockPosition
 from app.dto import marketwatch
 
 
@@ -18,6 +19,13 @@ def fake_create_stock_position() -> stock.CreateStockPosition:
 
 
 @pytest.fixture
+def fake_stock_position(fake_create_stock_position) -> StockPosition:
+    return ModelFactory.create_factory(StockPosition).build(
+        **fake_create_stock_position.model_dump()
+    )
+
+
+@pytest.fixture
 def fake_stock_performance() -> stock.StockPerformance:
     return ModelFactory.create_factory(stock.StockPerformance).build()
 
@@ -29,3 +37,10 @@ def fake_market_stock_records() -> list[marketwatch.MarketStockRecord]:
         marketwatch.MarketStockRecord(c=10, t=now),
         marketwatch.MarketStockRecord(c=10, t=now - relativedelta(days=1)),
     ]
+
+
+@pytest.fixture
+def fake_market_stock_api_response(
+    fake_market_stock_records,
+) -> marketwatch.MarketStockApiResponse:
+    return marketwatch.MarketStockApiResponse(results=fake_market_stock_records)

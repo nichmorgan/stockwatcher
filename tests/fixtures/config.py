@@ -1,3 +1,4 @@
+from kink import di
 from pydantic import SecretStr
 import pytest
 
@@ -8,4 +9,6 @@ __all__ = ["polygon_config"]
 
 @pytest.fixture
 def polygon_config() -> PolygonConfig:
-    return PolygonConfig(url="dummy", token=SecretStr("dummy"))
+    config = PolygonConfig(url="https://dummy.com", token=SecretStr("dummy"))
+    di[PolygonConfig] = config
+    return config

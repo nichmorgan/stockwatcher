@@ -6,13 +6,13 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from app.dto.auth import TokenData
 
-__all__ = ["get_current_active_user_id"]
+__all__ = ["get_current_active_user_id", "get_current_user", "ALGORITHM"]
 
 OAUTH2_SCHEME = HTTPBearer()
 ALGORITHM = "HS256"
 
 
-async def get_current_user(
+def get_current_user(
     token: Annotated[HTTPAuthorizationCredentials, Depends(OAUTH2_SCHEME)]
 ) -> TokenData:
     credentials_exception = HTTPException(
@@ -34,7 +34,7 @@ async def get_current_user(
         raise credentials_exception
 
 
-async def get_current_active_user_id(
+def get_current_active_user_id(
     current_user: Annotated[TokenData, Depends(get_current_user)]
 ) -> str:
     return current_user.sub

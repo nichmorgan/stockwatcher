@@ -4,9 +4,9 @@ from pydantic import (
     BaseModel,
     Field,
     field_validator,
+    field_serializer,
     PositiveFloat,
     PastDatetime,
-    PositiveInt,
 )
 
 __all__ = ["MarketStockRecord", "MarketStockApiResponse"]
@@ -21,7 +21,11 @@ class MarketStockRecord(BaseModel):
     def parse_date(cls, v: int | datetime) -> datetime:
         if isinstance(v, datetime):
             return v
-        return datetime.fromtimestamp(v / 100, tz=timezone.utc)
+        return datetime.fromtimestamp(v / 1000, tz=timezone.utc)
+
+    @field_serializer("date", when_used="always")
+    def serialize_date(date: datetime) -> int:  # type: ignore
+        return int(date.timestamp() * 1000)
 
 
 class MarketStockApiResponse(BaseModel):
