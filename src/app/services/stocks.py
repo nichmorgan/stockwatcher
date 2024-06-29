@@ -20,7 +20,7 @@ class StockService:
         self.__marketwatch = marketwatch
         self.__polygon = polygon
 
-    async def purchase_stock(
+    async def operate_stock(
         self,
         symbol: str,
         amount: int,
@@ -35,7 +35,11 @@ class StockService:
             )
             return
 
-        updated_amount = stock_position.amount + amount
+        updated_amount = max(stock_position.amount + amount, 0)
+        if updated_amount == 0:
+            await self.__repository.delete(symbol=symbol, user_id=user_id)
+            return
+
         await self.__repository.update(
             UpdateStockPosition(amount=updated_amount),
             symbol=symbol,

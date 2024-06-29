@@ -46,8 +46,8 @@ class StockRepository:
             session.add(updated_stock_position)
             await session.commit()
 
-    async def delete(self, *, stock_symbol: str, user_id: str) -> None:
-        stock_position = await self.read(symbol=stock_symbol, user_id=user_id)
+    async def delete(self, *, symbol: str, user_id: str) -> None:
+        stock_position = await self.read(symbol=symbol, user_id=user_id)
         if stock_position is None:
             raise ValueError("Stock position not found")
 

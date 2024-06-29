@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from pydantic import AfterValidator, Field, PositiveInt
+from pydantic import AfterValidator, Field, field_validator
 
 from app.dto.base import BaseDto
 
@@ -48,6 +48,11 @@ class CreateStockPosition(BaseDto):
     user_id: str
     symbol: str
     amount: AMOUNT_TYPE
+
+    @classmethod
+    @field_validator("symbol", mode="after")
+    def upper_case_symbol(cls, v: str) -> str:
+        return v.strip().upper()
 
 
 class UpdateStockPosition(BaseDto):
