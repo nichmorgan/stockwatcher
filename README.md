@@ -32,4 +32,13 @@ This project provides the following API routes for interacting with stock data:
 
 To access these routes, make HTTP requests to the corresponding endpoint, replacing `{stock_symbol}` with the desired stock symbol.
 
-For detailed information on how to use these routes and the expected response formats, refer to the API documentation available at the `/docs` endpoint.
+For detailed information on how to use these routes and the expected response formats, refer to the API documentation available at the [`/docs`](http://localhost:8000/docs) endpoint.
+
+## Makefile Commands
+
+The project includes a Makefile to simplify the setup and development process. Below are the commands available:
+
+- `make dev`: Starts the development server with hot reload enabled, after loading environment variables and starting the database.
+- `make start`: Starts all services and the application with hot reload enabled, after loading environment variables.
+
+These commands are designed to facilitate development workflows and ensure consistency across environments.
