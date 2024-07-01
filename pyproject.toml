@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "stocks-api"
+name = "stockwatcher"
 version = "0.1.0"
 description = ""
 authors = ["Morgan Nicholson <morgannicholson1371@gmail.com>"]
