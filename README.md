@@ -8,10 +8,9 @@ To run this project using Docker Compose or a Dockerfile, you need to set specif
 
 1. `POLYGON_URL`: URL for the Polygon API.
 2. `POLYGON_TOKEN`: Authentication token for accessing the Polygon API.
-3. `MARKETWATCH_URL`: URL for the MarketWatch API.
-4. `DATABASE_URL`: URL for the database connection.
-5. `DATABASE_ECHO`: Flag indicating whether to echo database queries.
-6. `CACHE_URL`: URL for the cache server.
+3. `DATABASE_URL`: URL for the database connection.
+4. `DATABASE_ECHO`: Flag indicating whether to echo database queries.
+5. `CACHE_URL`: URL for the cache server.
 
 ### Setting Environment Variables
 

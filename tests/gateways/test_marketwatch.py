@@ -1,8 +1,14 @@
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def setup(mock_polygon): ...
+
+
 def test_get_stock_performance(
     market_watch_gateway,
     fake_market_stock_records,
     fake_stock,
-    mock_polygon,
 ):
     performance = market_watch_gateway.get_stock_performance(fake_stock.symbol)
 

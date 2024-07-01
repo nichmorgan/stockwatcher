@@ -7,6 +7,7 @@ from app.dto.base import BaseDto
 __all__ = [
     "StockPerformance",
     "Stock",
+    "CreateStockPositionRequest",
     "CreateStockPosition",
     "UpdateStockPosition",
     "StockResponse",
@@ -44,10 +45,13 @@ class Stock(BaseDto):
     volume: int
 
 
-class CreateStockPosition(BaseDto):
+class CreateStockPositionRequest(BaseDto):
+    amount: AMOUNT_TYPE
+
+
+class CreateStockPosition(CreateStockPositionRequest):
     user_id: str
     symbol: str
-    amount: AMOUNT_TYPE
 
     @classmethod
     @field_validator("symbol", mode="after")

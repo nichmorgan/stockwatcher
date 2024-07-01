@@ -47,8 +47,9 @@ class PolygonGateway:
         return data.results[0]
 
     def get_stock(self, symbol: str) -> Stock:
+        # 4 days ago to today to get the latest stock price when is not closed yet at monday
         date_s_list = list(
-            map(lambda d: (date.today() - relativedelta(days=d)).isoformat(), range(3))
+            map(lambda d: (date.today() - relativedelta(days=d)).isoformat(), range(4))
         )
         for date_s in date_s_list:
             url = urljoin(self.__config.url, f"/v1/open-close/{symbol}/{date_s}")
@@ -56,7 +57,9 @@ class PolygonGateway:
             try:
                 response.raise_for_status()
             except requests.HTTPError as e:
-                if e.response.status_code == 403:
+                # 403: Price not closed yet
+                # 404: Price not stored
+                if e.response.status_code in [403, 404]:
                     continue
                 raise e
             data = Stock.model_validate_json(response.text)

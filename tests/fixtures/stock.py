@@ -14,14 +14,23 @@ def fake_stock() -> stock.Stock:
 
 
 @pytest.fixture
-def fake_create_stock_position() -> stock.CreateStockPosition:
-    return ModelFactory.create_factory(stock.CreateStockPosition).build()
+def fake_create_stock_position_request() -> stock.CreateStockPositionRequest:
+    return ModelFactory.create_factory(stock.CreateStockPositionRequest).build()
+
+
+@pytest.fixture
+def fake_create_stock_position(
+    fake_create_stock_position_request,
+) -> stock.CreateStockPosition:
+    return ModelFactory.create_factory(stock.CreateStockPosition).build(
+        **fake_create_stock_position_request.model_dump(by_alias=True)
+    )
 
 
 @pytest.fixture
 def fake_stock_position(fake_create_stock_position) -> StockPosition:
     return ModelFactory.create_factory(StockPosition).build(
-        **fake_create_stock_position.model_dump()
+        **fake_create_stock_position.model_dump(by_alias=True)
     )
 
 

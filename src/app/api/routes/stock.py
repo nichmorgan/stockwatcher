@@ -4,7 +4,7 @@ from kink import di
 
 from app.api.auth import get_current_active_user_id
 from app.dto.response import SimpleResponse
-from app.dto.stock import StockResponse
+from app.dto.stock import CreateStockPositionRequest, StockResponse
 from app.services.stocks import StockService
 
 __all__ = ["ROUTER"]
@@ -47,11 +47,12 @@ async def get_stock(
 @ROUTER.post("/{stock_symbol}", status_code=201)
 async def operate_stock(
     stock_symbol: str,
-    amount: int,
+    data: CreateStockPositionRequest,
     *,
     service: StockService = Depends(lambda: di[StockService]),
     user_id: str = Depends(get_current_active_user_id),
 ) -> SimpleResponse:
+    amount = data.amount
     await service.operate_stock(stock_symbol.strip().upper(), amount, user_id=user_id)
 
     message = f"{amount} units of stock {stock_symbol} were added to your stock record"
