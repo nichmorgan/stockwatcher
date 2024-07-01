@@ -2,7 +2,7 @@
 name = "stocks-api"
 version = "0.1.0"
 description = ""
-authors = ["Morgan Nicholson <55922364+nichmorgan@users.noreply.github.com>"]
+authors = ["Morgan Nicholson <morgannicholson1371@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
